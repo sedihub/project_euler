@@ -37,15 +37,15 @@ int main(int argc, char **argv)
     int n1 = 3;
     int n2 = 5;
  
-    if (argc != 2 and argc != 4) {
-        std::cout << "ERROR: Expect one or three integers!" << std::endl;
+    if (argc != 1 and argc != 2 and argc != 4) {
+        std::cout << "ERROR: None, one or three integers are expected!" << std::endl;
         return 1;
     }
     else if (argc == 2) {
         upper_limit = str_to_int(argv[1]);
         std::cout << "\tN  <--- " << upper_limit << std::endl;
     }
-    else {
+    else if (argc == 4){
         n1 = str_to_int(argv[1]);
         n2 = str_to_int(argv[2]);
         upper_limit = str_to_int(argv[3]);
