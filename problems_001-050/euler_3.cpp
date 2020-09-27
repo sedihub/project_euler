@@ -20,33 +20,65 @@ Solution:
 #include <iostream>
 #include <set>
 
+
+template <typename T>
 class PrimalityTest
 {
 public:
-    bool IsPrime(unsigned long long n)
+    PrimalityTest()
     {
-        it = prime_numbers.begin();
-        while(it != prime_numbers.end() and (*it)*(*it) <= n){
-            if(n % (*it) == 0) return false;
-            it++;
+        // Add the few primes to "prime" it ;)
+        primes.insert(2);
+        primes.insert(3);
+        primes.insert(5);
+    }
+
+    bool is_prime(T n)
+    {
+        if(n == 1)
+            return false;
+        if (primes.find(n) != primes.end())
+            return true;
+        for (it = primes.begin(); it != primes.end(); ++it){
+            if (n % (*it) == 0) {
+                return false;
+            }
+            if ((*it) * (*it) > n) {
+                primes.insert(n);
+                return true;
+            }
         }
-        prime_numbers.insert(n);
+        //
+        // If this number is beyond the range of current primes, get the rest:
+        rit = primes.rbegin();
+        std::advance(rit, 1);
+        T m = (*rit);
+        while (m <= n) {
+            m++;
+            this->is_prime(m);
+            if (n % m == 0) {
+                return false;
+            }
+        }
+        primes.insert(n);
         return true;
     }
 
     void PrintPrimes()
     {
         std::cout << "Accumulated Prime Numbers:" << std::endl;
-        for(it = prime_numbers.begin(); it != prime_numbers.end(); it++)
+        for (it = primes.begin(); it != primes.end(); it++)
         {
             std::cout << "\t" << *it << std::endl;
         }
     }
 
 protected:
-    std::set<unsigned long long> prime_numbers;
-    std::set<unsigned long long>::iterator it;
+    std::set<T> primes;
+    typename std::set<T>::iterator it;
+    typename std::set<T>::reverse_iterator rit;
 };
+
 
 int main()
 {
@@ -58,17 +90,14 @@ int main()
     if (n % 5 == 0) p = 5;
 
     // Add the first three primes that we checked manually 
-    PrimalityTest pt;
-    pt.IsPrime(2);
-    pt.IsPrime(3);
-    pt.IsPrime(5);
+    PrimalityTest<unsigned long long int> pt;
     
     unsigned long long x = 6;
     while (x * x <= n) {
-        if(pt.IsPrime(x + 1)){
+        if(pt.is_prime(x + 1)){
             if(n % (x + 1) == 0){p = x + 1;}
         }
-        if(pt.IsPrime(x + 5)){
+        if(pt.is_prime(x + 5)){
             if(n % (x + 5) == 0){p = x + 5;}
         }
         x += 6;
