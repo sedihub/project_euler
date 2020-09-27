@@ -18,6 +18,14 @@ PROBLEM:
 SOLUTION:
     Here is the idea: Given `a` and `b`, factorize `a` and form a map with prime factors of `a`
     as keys and values of b times the corresponding exponent.
+
+    Finally, note that the use of primality test is just to speed things up. Technically, when
+    decomposing a number into its prime factors, since after visiting each prime factor, we have
+
+            gcd(n/q^e, q) = 1
+
+    we don't have to worry about other powers of q. This is of course not the case if we instead
+    of prime decomposition were interested in numbers that are coprime.
     
 
     Answer: 9183
@@ -34,16 +42,16 @@ typedef std::map<unsigned int, unsigned int> uint_map_type;
 
 
 template <typename T>
-class IsPrime
+class PrimalityTest
 {
 public:
-    IsPrime(){
+    PrimalityTest(){
         primes.insert(2);
         primes.insert(3);
         primes.insert(5);
     }
 
-    bool test(T n)
+    bool is_prime(T n)
     {
         if(n == 1)
             return false;
@@ -65,7 +73,7 @@ public:
         T m = (*rit);
         while (m <= n) {
             m++;
-            this->test(m);
+            this->is_prime(m);
             if (n % m == 0) {
                 return false;
             }
@@ -88,14 +96,17 @@ protected:
 };
 
 
-uint_map_type factorize(unsigned int n, IsPrime<unsigned int> *is_prime_ptr, bool verbose=false)
+uint_map_type factorize(
+    unsigned int n, 
+    PrimalityTest<unsigned int> *is_prime_ptr, 
+    bool verbose=false)
 {
     uint_map_type factorized_n;
     unsigned int q = 2;
     if (verbose) std::cout << "\t" << n << " = ";
     while (n > 1) {
-        while (! is_prime_ptr->test(q)) {
-            q++;
+        while (! is_prime_ptr->is_prime(q)) {
+            q++;  // Just to speed up things; in principle can do without. See the note above.
         }
         //
         if (n % q == 0){
@@ -122,12 +133,12 @@ uint_map_type factorize(unsigned int n, IsPrime<unsigned int> *is_prime_ptr, boo
 int main()
 {
     uint_map_type factroized_n;
-    IsPrime<unsigned int> is_prime;
+    PrimalityTest<unsigned int> pt;
 
     uint_map_type temp;
     std::set<uint_map_type> unique_pairs;    
     for (unsigned int a = 2; a <= 100; a++) {
-        factroized_n = factorize(a, &is_prime);
+        factroized_n = factorize(a, &pt);
         for (unsigned int b = 2; b <= 100; b++) { // create various powers of b and add them to the set
             temp = factroized_n;
             for (uint_map_type::iterator it = temp.begin(); it != temp.end(); it++){
