@@ -30,20 +30,41 @@ SOLUTION:
 
 
 template <typename T>
-class IsPrime
+class PrimalityTest
 {
 public:
-    IsPrime(){
+    PrimalityTest(){
         primes.insert(2);
         primes.insert(3);
         primes.insert(5);
     }
 
-    bool test(T n)
+    bool is_prime(T n)
     {
+        if(n == 1)
+            return false;
+        if (primes.find(n) != primes.end())
+            return true;
         for (it = primes.begin(); it != primes.end(); ++it){
-            if(n % (*it) == 0) return false;
-            if((*it) * (*it) > n) break;
+            if (n % (*it) == 0) {
+                return false;
+            }
+            if ((*it) * (*it) > n) {
+                primes.insert(n);
+                return true;
+            }
+        }
+        //
+        // If this number is beyond the range of current primes, get the rest:
+        rit = primes.rbegin();
+        std::advance(rit, 1);
+        T m = (*rit);
+        while (m <= n) {
+            m++;
+            this->is_prime(m);
+            if (n % m == 0) {
+                return false;
+            }
         }
         primes.insert(n);
         return true;
@@ -69,6 +90,7 @@ public:
 protected:
     std::set<T> primes;
     typename std::set<T>::iterator it;
+    typename std::set<T>::reverse_iterator rit;
 };
 
 
@@ -80,11 +102,11 @@ T triangle_number(T n)
 
 
 template <typename T>
-std::map<T, T> prime_decomposition(T n, IsPrime<T> *prime_test)
+std::map<T, T> prime_decomposition(T n, PrimalityTest<T> *prime_test)
 {
     std::map<T, T> decomp;
 
-    prime_test->test(n);
+    prime_test->is_prime(n);
     const std::set<T>&  primes = prime_test-> get_primes();
     typename std::set<T>::const_iterator it;
     for (it = primes.begin(); it != primes.end(); ++it){
@@ -143,7 +165,7 @@ int main()
     ulli n = 2;
     ulli n_mod_6;
 
-    IsPrime<ulli> prime_test;
+    PrimalityTest<ulli> prime_test;
 
     std::map<ulli, ulli> n_decom = prime_decomposition<ulli>(n, &prime_test);
     std::map<ulli, ulli> np1_decom = prime_decomposition<ulli>((n + 1), &prime_test);
