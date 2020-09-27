@@ -10,20 +10,41 @@ SOLUTION:
 #include <set>
 
 template <typename T>
-class IsPrime
+class PrimalityTest
 {
 public:
-    IsPrime(){
+    PrimalityTest(){
         primes.insert(2);
         primes.insert(3);
         primes.insert(5);
     }
 
-    bool test(T n)
+    bool is_prime(T n)
     {
+        if(n == 1)
+            return false;
+        if (primes.find(n) != primes.end())
+            return true;
         for (it = primes.begin(); it != primes.end(); ++it){
-            if(n % (*it) == 0) return false;
-            if((*it) * (*it) > n) break;
+            if (n % (*it) == 0) {
+                return false;
+            }
+            if ((*it) * (*it) > n) {
+                primes.insert(n);
+                return true;
+            }
+        }
+        //
+        // If this number is beyond the range of current primes, get the rest:
+        rit = primes.rbegin();
+        std::advance(rit, 1);
+        T m = (*rit);
+        while (m <= n) {
+            m++;
+            this->is_prime(m);
+            if (n % m == 0) {
+                return false;
+            }
         }
         primes.insert(n);
         return true;
@@ -66,17 +87,17 @@ protected:
 int main()
 {
     unsigned long long upper_limit = 2000000;
-    IsPrime<unsigned long long int> is_prime;
+    PrimalityTest<unsigned long long int> pt;
     unsigned long long int k = 6;
     while (k + 5 < upper_limit) {
-        is_prime.test(k+1);
-        is_prime.test(k+5);
+        pt.is_prime(k+1);
+        pt.is_prime(k+5);
         k += 6;
     }
-    if(k+1 < upper_limit) is_prime.test(k+1);
+    if(k+1 < upper_limit) pt.is_prime(k+1);
 
 
-    std::cout << "Sum of primes under " << upper_limit << ": " << is_prime.get_sum() << std::endl;
+    std::cout << "Sum of primes under " << upper_limit << ": " << pt.get_sum() << std::endl;
 
     return 0;
 }
