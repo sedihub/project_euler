@@ -18,7 +18,7 @@ SOLUTION:
 #include <vector> 
 
 
-bool IsPalindrome(int m)
+bool is_palindrome(int m)
 {
     char digit = '0';
     std::vector<char> digits;
@@ -49,7 +49,7 @@ int main()
     for (int n1 = 100; n1 < 1000; ++n1) {
         for (int n2 = n1; n2 < 1000; ++n2) {
             n1xn2 = n1 * n2;
-            if (IsPalindrome(n1xn2)) {
+            if (is_palindrome(n1xn2)) {
                 std::cout << "\t" << n1 << " x " << n2 << " = "\
                           << n1xn2 << std::endl;
                 if (n1xn2 > n1xn2_max) {
