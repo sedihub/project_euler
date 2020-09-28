@@ -38,20 +38,20 @@ SOLUTION:
 
 bool is_prime(int n)
 {
-    if (n < 23){
-        if(n == 2 || n == 3 || n == 5 || n == 7  || n == 11 || n == 13 || n == 17 || n == 19){
+    if (n < 23) {
+        if (n == 2 || n == 3 || n == 5 || n == 7  || n == 11 || n == 13 || n == 17 || n == 19) {
             return true;
         }
         return false;
     }
-    else if( n%2  == 0 ) return false;
-    else if( n%3  == 0 ) return false;
-    else if( n%5  == 0 ) return false;
-    else if( n%7  == 0 ) return false;
-    else if( n%11 == 0 ) return false;
-    else if( n%13 == 0 ) return false;
-    else if( n%17 == 0 ) return false;
-    else if( n%19 == 0 ) return false;
+    else if (n % 2  == 0) return false;
+    else if (n % 3  == 0) return false;
+    else if (n % 5  == 0) return false;
+    else if (n % 7  == 0) return false;
+    else if (n % 11 == 0) return false;
+    else if (n % 13 == 0) return false;
+    else if (n % 17 == 0) return false;
+    else if (n % 19 == 0) return false;
     for (unsigned int i = 11; (2*i + 1)*(2*i + 1) <= n; i++){
         if(n % (2*i + 1) == 0) return false;
     }
