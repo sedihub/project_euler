@@ -1,7 +1,8 @@
 # Project Euler
 
-This repository contains my old (from 2014) and new project Euler solutions. I have converted some of the old C++ codes to Python3.
+This repository contains my old (from 2014) and new [Project Euler](https://projecteuler.net/) solutions. I may converted some of the old C++ codes to Python3.
 
+I have deliberately refrained from using header files for certain common pieces (e.g., detecting primes) for two main reasons: I want the solutions to be standalone. The second reason is that this gives me the freedom to tweak them and use the most suitable version for the problem. 
 
 
 # Project Euler Solution Submissions
