@@ -81,6 +81,7 @@ SOLUTION:
 #include <iostream>
 #include <map>
 #include <vector>
+#include <algorithm>
 #include <utility>
 #include <set>
 
