@@ -45,7 +45,7 @@ SOLUTION:
   Let's do this! We need a class for hand and an overloaded comparison operator. I will use one
   more calss for the ease of comparing hands.
 
-  ANSWER: 
+  ANSWER: 376
 **/
 
 #include <iostream>
@@ -174,14 +174,15 @@ public:
 
     // Royal Flush, Straight Flush and Flush
     if (c[0].suit == c[1].suit && 
+        c[1].suit == c[2].suit && 
         c[2].suit == c[3].suit && 
         c[3].suit == c[4].suit) {
       if (c[1].val == c[0].val + 1 &&
           c[2].val == c[0].val + 2 &&
           c[3].val == c[0].val + 3 &&
           c[4].val == c[0].val + 4) {
-        hand_rank_card = c[5].val;
-        if (c[0].symb_val == 'J') hand_rank = 10;
+        hand_rank_card = c[4].val;
+        if (c[0].symb_val == 'T') hand_rank = 10;
         else hand_rank = 9;
       }
       else {
@@ -209,8 +210,7 @@ public:
     else if (c[1].val == c[0].val + 1 &&
              c[2].val == c[0].val + 2 &&
              c[3].val == c[0].val + 3 &&
-             c[4].val == c[0].val + 4 &&
-             c[5].val == c[0].val + 5) {
+             c[4].val == c[0].val + 4) {
       hand_rank_card = c[4].val;
       hand_rank = 5;
     }
