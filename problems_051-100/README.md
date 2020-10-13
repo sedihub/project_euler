@@ -1,1 +1,3 @@
 # Notes
+
+It appears there is a problem with the problem 059 data file on the Project Euler website... 
