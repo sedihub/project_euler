@@ -8,8 +8,7 @@ PROBLEM:
 
 
 SOLUTION:
-  Brute-force solution. It is very slow (~11 sec). I need to come up with a more efficient 
-  solution. Perhaps because I use a vector of `char` in my implementation...
+  Brute-force solution, that's not too brute-force ;)
 
   ANSWER: 972 for 99 ^ 95.
 **/
@@ -236,9 +235,11 @@ int main()
   max_digits_sum = 0;
   for (unsigned long int a = 1; a < 100; a++) {
     if (a % 10 == 0) continue;
-    LargeUInt arb_prec_a(a);
+    LargeUInt n(a);
+    LargeUInt p(a);
     for (unsigned long int b = 2; b < 100; b++) {
-      digits_sum = (arb_prec_a ^ b).sum_digits();
+      p = p * a;
+      digits_sum = p.sum_digits();
       if (digits_sum > max_digits_sum) {
         a_max = a;
         b_max = b;
