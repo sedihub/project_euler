@@ -8,8 +8,8 @@ PROBLEM:
 
 
 SOLUTION:
-  Brute-force solution. It is very slow (~11 sec). I need to come up with a more 
-  efficient solution...
+  Brute-force solution. It is very slow (~11 sec). I need to come up with a more efficient 
+  solution. Perhaps because I use a vector of `char` in my implementation...
 
   ANSWER: 972 for 99 ^ 95.
 **/
