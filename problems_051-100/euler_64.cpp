@@ -57,7 +57,7 @@ SOLUTION:
       $$ 
   Note that $d_0$ is the integer sqrt of $x$.
 
-  ANSWER: 
+  ANSWER: 1322
 **/
 
 #include <iostream>
