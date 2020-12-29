@@ -15,7 +15,7 @@ SOLUTION:
   Actually, since finding the solution is so fast, I worked around this by using a
   rough guess for the needed numbed of primes.
 
-  ANSWER: 71, which can be written in 5007 ways.
+  ANSWER: 71 can be written in 5007 ways.
  **/
 
 #include <iostream>
@@ -118,8 +118,8 @@ int main()
       break;
     }
   } 
-  std::cout << "\tAnswer: " << solution_number 
-            << ", which can be written in " << solution_num_sums
+  std::cout << solution_number 
+            << " can be written in " << solution_num_sums
             << " ways." << std::endl;
 
   return 0;
