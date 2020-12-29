@@ -36,7 +36,7 @@ SOLUTION:
   I did that manually as there were only three solution. Coding that part
   is of course straightforward.
 
-  Note that it is likely possible to devise an even more efficent slution 
+  Note that it is likely possible to devise an even more efficient solution 
   by improving searching the cycles.
 
   ANSWER: 402
