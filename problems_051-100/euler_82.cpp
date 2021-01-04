@@ -88,7 +88,7 @@ int main()
   // Define a map from path sums to indices and initialize with the first column:
   typedef std::pair<uint, uint> IdxPair;
   typedef std::pair<uint, IdxPair> MapPair;
-  std::map<uint, IdxPair> paths;
+  std::multimap<uint, IdxPair> paths;
   std::set<IdxPair> visited_nodes;
   std::set<IdxPair> active_nodes;
   for (uint row_idx = 0; row_idx < NUM_ROWS; row_idx++) {
